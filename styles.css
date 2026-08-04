@@ -281,8 +281,7 @@ body {
 
 .indicaciones {
   background-image: linear-gradient(rgb(255, 255, 255),
-      rgba(80, 123, 209, 0.59)),
-    url(assets/one.jpeg);
+      rgba(80, 123, 209, 0.59));
   background-size: cover;
   background-position: center;
   color: #ac8146;
