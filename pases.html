@@ -114,24 +114,24 @@
 <body>
     <div class="generator-container">
         <h1>Generador de Invitaciones</h1>
-        
+
         <div class="form-group">
             <label for="firstName">Nombre:</label>
             <input type="text" id="firstName" placeholder="Ingrese el nombre">
         </div>
-        
+
         <div class="form-group">
             <label for="lastName">Apellido:</label>
             <input type="text" id="lastName" placeholder="Ingrese el apellido">
         </div>
-        
+
         <div class="form-group">
             <label for="numPasses">Número de pases:</label>
             <input type="number" id="numPasses" placeholder="Ingrese el número de pases" min="1" value="1">
         </div>
-        
+
         <button id="generateButton">Generar Enlace</button>
-        
+
         <div class="preview" id="previewContainer">
             <div class="preview-title">Vista previa:</div>
             <div class="preview-content">
@@ -142,7 +142,7 @@
                 <div id="preview-places-text">Lugar</div>
             </div>
         </div>
-        
+
         <div class="result" id="resultContainer">
             <p><strong>Enlace personalizado:</strong></p>
             <p id="generatedLink"></p>
@@ -158,21 +158,21 @@
             const previewContainer = document.getElementById('previewContainer');
             const generatedLinkElement = document.getElementById('generatedLink');
             const numPassesInput = document.getElementById('numPasses');
-            
+
             // Actualizar la vista previa cuando se cambia el número de pases
             numPassesInput.addEventListener('input', updatePreview);
             document.getElementById('firstName').addEventListener('input', updatePreview);
             document.getElementById('lastName').addEventListener('input', updatePreview);
-            
+
             function updatePreview() {
                 const firstName = document.getElementById('firstName').value.trim();
                 const lastName = document.getElementById('lastName').value.trim();
                 const numPasses = document.getElementById('numPasses').value.trim();
-                
+
                 if (firstName || lastName || numPasses) {
                     document.getElementById('preview-name').textContent = `${firstName} ${lastName}`;
                     document.getElementById('preview-number').textContent = numPasses;
-                    
+
                     // Actualizar singular/plural
                     if (numPasses === "1") {
                         document.getElementById('preview-passes-title').textContent = "Pase";
@@ -181,43 +181,43 @@
                         document.getElementById('preview-passes-title').textContent = "Pases";
                         document.getElementById('preview-places-text').textContent = "Lugares";
                     }
-                    
+
                     previewContainer.style.display = 'block';
                 } else {
                     previewContainer.style.display = 'none';
                 }
             }
-            
+
             generateButton.addEventListener('click', function() {
                 const firstName = document.getElementById('firstName').value.trim();
                 const lastName = document.getElementById('lastName').value.trim();
                 const numPasses = document.getElementById('numPasses').value.trim();
-                
+
                 if (!firstName || !lastName || !numPasses) {
                     alert('Por favor, complete todos los campos');
                     return;
                 }
-                
+
                 // Crear los parámetros para la URL
                 const params = `${encodeURIComponent(firstName)}-${encodeURIComponent(lastName)}-${encodeURIComponent(numPasses)}-`;
-                
+
                 // Obtener la URL base de la página actual
                 const baseUrl = window.location.href.split('/').slice(0, -1).join('/');
-                
+
                 // Crear la URL completa
-                const fullUrl = `${baseUrl}/sobre.html?${params}`;
-                
+                const fullUrl = `${baseUrl}/index.html?${params}`;
+
                 // Mostrar el resultado
                 generatedLinkElement.textContent = fullUrl;
                 resultContainer.style.display = 'block';
-                
+
                 // Actualizar la vista previa
                 updatePreview();
             });
-            
+
             copyButton.addEventListener('click', function() {
                 const linkText = generatedLinkElement.textContent;
-                
+
                 // Crear un elemento de texto temporal para copiar
                 const tempInput = document.createElement('input');
                 tempInput.value = linkText;
@@ -225,7 +225,7 @@
                 tempInput.select();
                 document.execCommand('copy');
                 document.body.removeChild(tempInput);
-                
+
                 // Cambiar temporalmente el texto del botón para dar feedback
                 const originalText = copyButton.textContent;
                 copyButton.textContent = '¡Enlace copiado!';

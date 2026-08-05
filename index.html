@@ -2,1044 +2,258 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nuestra Boda Miguel & Deysi</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel&family=Herr+Von+Muellerhoff&family=Roboto:wght@300;400&display=swap"
-        rel="stylesheet" />
-
-    <!-- Open Graph Meta -->
-    <meta property="og:title" content="Nuestra Boda Miguel & Deysi">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda Miguel y Deysi</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles1.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <meta property="og:image" content="assets/miguel-deysi-01.jpeg">
+    <meta property="og:title" content="Nuestra Boda Miguel y Deysi">
     <meta property="og:description" content="¡Te invitamos a celebrar Nuestra Boda!">
-    <meta property="og:image" content="https://ron981010.github.io/miguel-deysi/assets/miguel-deysi-01.jpeg">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ron981010.github.io/miguel-deysi/">
 </head>
 
 <body>
+    <div class="containerHome">
+        <img src="Flowers.PNG" alt="qr gift" class="flores">
+    </div>
+    <h1 class="letering">Miguel y Deysi</h1>
+    <h1 class="textlet" style="text-align: center; color:#10533b;">¡Te invitamos a celebrar Nuestra Boda!</h1>
+    <div class="personal" style="margin-top: 50px;  color:#10533b;">
+        <div class="section-title textlet" id="passes-title" style="margin-bottom: 25px;">Pase</div>
+        <h1 class="footer subtitle" id="name"
+            style="text-align: center; font-size:30px; font-weight: bold; margin-block: 5px;"></h1>
+        <div class="footer subtitle reveal-left" style="margin-bottom: 5px;">
+            <h4>Tenemos <span class="footer" id="reserved-phrase">Reservado</span> <br></h4>
+        </div>
+        <h4 id="passnumbers" class="subtitle reveal-left">1</h4>
+        <div class="footer text" style="margin-top:10px">
+            <h4 id="places-text">Lugar</h4>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let rawParam = window.location.search.substring(1);
+
+            rawParam = rawParam.replace(/\+/g, ' ');
+
+            let decoded = rawParam;
+            let previous;
+            do {
+                previous = decoded;
+                try {
+                    decoded = decodeURIComponent(decoded);
+                } catch (e) {
+                    console.warn("No se pudo decodificar completamente:", e);
+                    break;
+                }
+            } while (decoded !== previous);
+
+            const parts = decoded.split('-');
+
+            if (parts.length >= 3) {
+                const firstName = parts[0].trim();
+                const lastName = parts[1].trim();
+                const numPasses = parts[2].trim();
+
+                document.getElementById('name').textContent = `${firstName} ${lastName}`;
+                document.getElementById('passnumbers').textContent = numPasses;
+
+                const reservedText = document.getElementById('reserved-phrase');
+                const passesTitle = document.getElementById('passes-title');
+                const placesText = document.getElementById('places-text');
+
+                if (numPasses === "1") {
+                    passesTitle.textContent = "Pase";
+                    placesText.textContent = "Lugar";
+                    reservedText.textContent = "Reservado";
+                } else {
+                    passesTitle.textContent = "Pases";
+                    placesText.textContent = "Lugares";
+                    reservedText.textContent = "Reservados";
+                }
+            }
+        });
+    </script>
     <style>
-        /* Ocultar el contenido principal al cargar */
-        #content {
-            display: none;
+        #passnumbers {
+            border: 3px solid #64796c;
+            text-align: center;
+            padding-inline: 50px;
+            font-size: 80px;
+            margin: 15px;
         }
 
-        /* Estilo del contenedor del loader */
-        #loader {
+        .personal {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-items: center;
             align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: white;
-            /* Cambia el color si es necesario */
-            z-index: 9999;
-        }
-
-        .loader1 {
-            margin-top: -120px;
+            flex-direction: column;
         }
     </style>
-    <div id="loader">
-        <div>
-            <h1 class="subtitle" style="text-align: center;">Nuestra Boda</h1>
-            <h1 class="title">Miguel & Deysi</h1>
+
+    <div class="textlet">
+        <p class="textlet1">Domingo 6 de septiembre<br><br>16:00 hrs<br>(PUNTUAL)</p>
+    </div>
+    <div class="countdown">
+        <h1>Estamos a</h1>
+        <div id="timer">
+            <div class="time-unit" id="days">00</div>
+            <div class="time-unit">:</div>
+            <div class="time-unit" id="hours">00</div>
+            <div class="time-unit">:</div>
+            <div class="time-unit" id="minutes">00</div>
+            <div class="time-unit">:</div>
+            <div class="time-unit" id="seconds">00</div>
         </div>
-        <div class="loader1">
-            <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
-                type="module"></script>
-            <dotlottie-player src="https://lottie.host/cb27c642-1c0f-454d-b13d-a72b53611f23/1NEYAIKha0.lottie"
-                background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+        <div class="time-labels">
+            <div class="time-label">DIAS</div>
+            <div class="time-label">HS</div>
+            <div class="time-label">MIN</div>
+            <div class="time-label">SEG</div>
+        </div>
+        <h2>de vivir nuestro día especial con tu compañia.</h2>
+    </div>
+    <h4>Toca el sobre para abrir la invitación</h4>
+    <div class="carta">
+        <a href="home.html" id="envb"><img class="cartaInside" src="envelope.png" alt="carta"></a>
+        <script>
+            // Modifica el enlace para mantener los parámetros de la URL
+            document.addEventListener('DOMContentLoaded', function () {
+                var envb = document.getElementById('envb');
+                if (envb) {
+                    var params = window.location.search;
+                    if (params) {
+                        envb.href = "home.html" + params;
+                    }
+                }
+            });
+        </script>
+        <img src="flor2.PNG" alt="flores" id="floresHome">
+    </div>
+    <div class="totens confirmaciones">
+        <div class="anim-anillos" class="toten1" id="toten1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" width="150" height="150"
+                preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <clipPath id="__lottie_element_75">
+                        <rect width="150" height="150" x="0" y="0"></rect>
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#__lottie_element_75)">
+                    <g transform="matrix(1,0,0,1,47.29375457763672,20.146596908569336)" opacity="0.6827542372879326">
+                        <g opacity="1" transform="matrix(1,0,0,1,15.862000465393066,18.20599937438965)">
+                            <path class="anillo-path"
+                                d="M5.724,13.821C5.032,13.981,4.349,13.571,3.843,13.268C3.746,13.209,3.654,13.154,3.588,13.12C1.193,11.869,-0.996,10.318,-2.917,8.511C-3.373,8.082,-3.82,7.632,-4.247,7.173C-7.15,4.054,-9.331,0.323,-10.729,-3.916C-11.216,-5.392,-11.637,-6.964,-10.984,-8.533C-10.77,-9.045,-10.245,-9.969,-9.124,-10.396C-7.972,-10.834,-6.634,-10.589,-5.253,-9.686C-2.224,-7.706,-0.428,-4.799,0.972,-1.759C1.193,-4.68,1.761,-7.298,2.69,-9.704C3.021,-10.557,3.424,-11.456,4.142,-12.245C4.973,-13.158,6.099,-13.744,7.23,-13.852C8.588,-13.981,10.378,-13.345,11.1,-11.643C11.637,-10.374,11.435,-8.962,11.202,-7.739C10.869,-5.986,10.404,-4.22,9.954,-2.512C9.501,-0.791,9.033,0.987,8.704,2.738C8.505,3.803,8.354,4.892,8.208,5.945C8.135,6.478,8.058,7.03,7.976,7.573C7.786,8.835,7.533,10.322,7.103,11.795C7.083,11.861,7.064,11.942,7.043,12.031C6.902,12.622,6.69,13.514,5.837,13.79C5.799,13.802,5.762,13.813,5.724,13.821z" />
+                        </g>
+                    </g>
+                    <g transform="matrix(1,0,0,1,80.91278076171875,24.922286987304688)" opacity="0.2512999999995208">
+                        <g opacity="1" transform="matrix(1,0,0,1,12.479000091552734,14.140999794006348)">
+                            <path class="anillo-path1"
+                                d="M-4.14,9.779C-4.745,9.583,-4.896,8.951,-4.995,8.532C-5.011,8.469,-5.022,8.412,-5.036,8.365C-5.342,7.32,-5.522,6.265,-5.657,5.371C-5.715,4.985,-5.77,4.594,-5.821,4.216C-5.925,3.469,-6.032,2.696,-6.174,1.941C-6.406,0.7,-6.739,-0.562,-7.06,-1.782C-7.379,-2.993,-7.709,-4.246,-7.945,-5.489C-8.109,-6.357,-8.254,-7.358,-7.872,-8.258C-7.36,-9.465,-6.091,-9.916,-5.128,-9.825C-4.325,-9.749,-3.527,-9.333,-2.938,-8.685C-2.429,-8.125,-2.143,-7.488,-1.908,-6.883C-1.249,-5.176,-0.847,-3.32,-0.689,-1.249C0.304,-3.404,1.578,-5.465,3.727,-6.871C4.706,-7.511,5.654,-7.685,6.471,-7.374C7.266,-7.071,7.639,-6.416,7.79,-6.053C8.253,-4.939,7.955,-3.825,7.609,-2.778C6.617,0.228,5.07,2.875,3.012,5.087C2.709,5.412,2.392,5.731,2.068,6.036C0.706,7.317,-0.846,8.417,-2.545,9.304C-2.592,9.329,-2.657,9.368,-2.726,9.409C-3.085,9.625,-3.569,9.916,-4.06,9.802C-4.086,9.795,-4.113,9.788,-4.14,9.779z" />
+                        </g>
+                    </g>
+                    <g transform="matrix(1,0,0,1,20.293,58.118)" opacity="1">
+                        <g opacity="1" transform="matrix(1,0,0,1,39.72,40.464)">
+                            <path class="anillo-move1"
+                                d="M31.128,0C31.128,17.603,17.192,31.872,0,31.872C-17.191,31.872,-31.128,17.603,-31.128,0C-31.128,-17.602,-17.191,-31.872,0,-31.872C17.192,-31.872,31.128,-17.602,31.128,0z" />
+                        </g>
+                    </g>
+                    <g transform="matrix(1,0,0,1,55.828,63.21)" opacity="1">
+                        <g opacity="1" transform="matrix(1,0,0,1,37.234,37.918)">
+                            <path class="anillo-move2"
+                                d="M28.642,0C28.642,16.196,15.818,29.326,-0.001,29.326C-15.819,29.326,-28.641,16.196,-28.641,0C-28.641,-16.196,-15.819,-29.326,-0.001,-29.326C15.818,-29.326,28.642,-16.196,28.642,0z" />
+                        </g>
+                    </g>
+                </g>
+            </svg>
+            <p>Confirmar Asistencia</p>
+        </div>
+        <div class="toten1a"><a target="_blank" class="b2"
+                href="https://wa.me/51994759530?text=Sí%2C%20podré%20asistir%20a%20la%20boda%20de%20Miguel%20y%20Deysi%20el%206%20de%20septiembre.%20Mi%20nombre%20y%20apellido%20es%3A%20">Novia</a>
         </div>
     </div>
-    <script>
-        window.addEventListener('load', function () {
-            // Mantén el loader visible durante un tiempo fijo
-            setTimeout(function () {
-                // Oculta el loader
-                document.getElementById('loader').style.display = 'none';
-                // Muestra el contenido principal
-                document.getElementById('content').style.display = 'block';
-            }, 3000); // 3000 milisegundos = 3 segundos
-        });
-    </script>
-    <style>
-        .firefly {
-            position: fixed;
-            pointer-events: none;
-            border-radius: 50%;
-            z-index: 1;
-            box-shadow: 0 0 18px 8px rgba(0, 180, 255, 0.25);
-            transition: filter 0.3s;
-            mix-blend-mode: lighten;
-        }
-
-        .foreground-firefly {
-            width: 12px;
-            height: 12px;
-            filter: blur(1px);
-            position: fixed;
-            top: 0;
-            left: 0;
-        }
-
-        .background-firefly {
-            width: 7px;
-            height: 7px;
-            filter: blur(2.5px);
-            position: fixed;
-            top: 0;
-            left: 0;
-        }
-    </style>
-    <script>
-        // Paleta de tonos celeste y azul
-        const bluePalette = [
-            "#00bfff", "#1e90ff", "#87cefa", "#4682b4", "#5dade2",
-            "#2980b9", "#48c6ef", "#0093e9", "#38b6ff", "#6dd5ed"
-        ];
-
-        function createFireflies(count, isBackground = false) {
-            const group = [];
-            for (let i = 0; i < count; i++) {
-                const el = document.createElement('div');
-                el.classList.add('firefly');
-                el.classList.add(isBackground ? 'background-firefly' : 'foreground-firefly');
-                // Color celeste/azul aleatorio
-                const color = bluePalette[Math.floor(Math.random() * bluePalette.length)];
-                el.style.background = `radial-gradient(circle at 60% 40%, ${color} 0%, #fff 60%, transparent 100%)`;
-                el.style.boxShadow = `0 0 18px 8px ${color}55`;
-                el.style.pointerEvents = "none";
-                el.style.position = "fixed";
-                el.style.zIndex = "1";
-                document.body.appendChild(el);
-
-                group.push({
-                    el,
-                    x: Math.random() * window.innerWidth,
-                    y: Math.random() * window.innerHeight,
-                    dx: (Math.random() - 0.5) * (isBackground ? 0.3 : 0.7),
-                    dy: (Math.random() - 0.5) * (isBackground ? 0.3 : 0.7),
-                    scale: isBackground
-                        ? Math.random() * 0.3 + 0.3
-                        : Math.random() * 0.5 + 0.7,
-                    opacity: isBackground
-                        ? Math.random() * 0.3 + 0.2
-                        : Math.random() * 0.5 + 0.5,
-                    speedFactor: isBackground ? 0.5 : 1
-                });
-            }
-            return group;
-        }
-
-        // Esperar a que el DOM esté listo para que los fireflies no queden tapados por otros elementos
-        window.addEventListener('DOMContentLoaded', () => {
-            const backgroundFlies = createFireflies(10, true);
-            const foregroundFlies = createFireflies(10, false);
-            const fireflies = [...backgroundFlies, ...foregroundFlies];
-
-            let scrollY = 0;
-            window.addEventListener('scroll', () => {
-                scrollY = window.scrollY;
-            });
-
-            window.addEventListener('touchstart', (e) => {
-                const touchX = e.touches[0].clientX;
-                const touchY = e.touches[0].clientY;
-                fireflies.forEach(f => {
-                    const dx = f.x - touchX;
-                    const dy = f.y - touchY;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
-                        f.dx += dx / dist * 0.5;
-                        f.dy += dy / dist * 0.5;
-                    }
-                });
-            });
-
-            function animate() {
-                fireflies.forEach(f => {
-                    f.x += f.dx * f.speedFactor;
-                    f.y += f.dy * f.speedFactor + scrollY * 0.0005;
-
-                    // Rebote de bordes
-                    if (f.x < 0 || f.x > window.innerWidth) f.dx *= -1;
-                    if (f.y < 0 || f.y > window.innerHeight) f.dy *= -1;
-
-                    f.el.style.transform = `translate(${f.x}px, ${f.y}px) scale(${f.scale})`;
-                    f.el.style.opacity = `${f.opacity + Math.sin(Date.now() * 0.002 + f.x) * 0.2}`;
-                });
-                requestAnimationFrame(animate);
-            }
-            animate();
-        });
-    </script>
-    <div id="content">
-        <section class="section">
-            <h1 class="title-composed reveal" id="jireh">
-                <div class="line-1">Miguel</div>
-                <div class="line-2"><span class="amp">&</span><span class="second-name">Deysi</span></div>
-            </h1>
-
-            <div class="contenedor b1">
-                <img src="./assets/miguel-deysi-01.jpeg" alt="Miguel y Deysi en la playa" class="image-reveal">
-            </div>
-
-            <p class="title reveal-left"> ¡Nuestra Boda!</p>
-            <p class="subtitle reveal-left">TU PRESENCIA ES ALTAMENTE APRECIADA EN ESTE MOMENTO TAN ESPECIAL.</p>
-            <p class="subtitle reveal-left" style="margin-bottom: 0px;">6 de septiembre, 2026.</p>
-            <p class="subtitle reveal-left" style="margin-bottom: 0px;">cuenta regresiva</p>
-            <div id="countdown" class="time subtitle reveal-left"></div>
-            <script>
-                function updateCountdown() {
-                    const targetDate = new Date("2026-09-06T16:00:00-04:00").getTime();
-                    const now = new Date().getTime();
-                    const difference = targetDate - now;
-
-                    if (difference <= 0) {
-                        document.getElementById("countdown").innerHTML = "¡Ya comenzó la celebración!";
-                        return;
-                    }
-
-                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                    document.getElementById("countdown").innerHTML =
-                        `${days} días ${hours}h ${minutes}m ${seconds}s`;
-                }
-
-                updateCountdown(); // Ejecuta al cargar
-                setInterval(updateCountdown, 1000); // Actualiza cada segundo
-            </script>
-
-            <img src="assets/1-1w43p4p.png" alt="Pareja tomados de la mano" class="quote-image fra image-reveal" id="pri" />
-            <div id="countdown" class="subtitle reveal-left"></div>
-        </section>
-        <div class="contenedor">
-            <img src="./assets/miguel-deysi-02.jpeg" alt="Miguel y Deysi juntos en la playa" class="image-reveal">
+    <div class="totens">
+        <div class="toten3"><svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="80px" height="80px"
+                viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
+                <metadata>
+                    Created by potrace 1.15, written by Peter Selinger 2001-2017
+                </metadata>
+                <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="#10533b" stroke="none">
+                    <path d="M6335 12360 c-516 -49 -1002 -220 -1425 -502 -175 -116 -281 -200
+           -419 -333 -193 -185 -350 -375 -478 -579 -474 -754 -590 -1678 -313 -2516 26
+           -80 241 -676 478 -1325 1892 -5186 2434 -6670 2436 -6672 2 -2 204 547 449
+           1219 245 673 890 2440 1433 3928 542 1488 1004 2757 1026 2820 328 963 133
+           2036 -516 2840 -100 125 -313 336 -446 443 -441 355 -936 572 -1505 658 -157
+           23 -560 34 -720 19z m498 -1415 c381 -67 721 -314 901 -654 158 -301 190 -666
+           85 -986 -153 -465 -564 -804 -1051 -865 -295 -37 -607 38 -861 207 -95 63
+           -249 213 -320 310 -238 331 -301 753 -172 1140 65 195 159 347 305 493 184
+           185 418 308 673 355 102 18 333 18 440 0z" />
+                </g>
+            </svg>
+            <p class="vendimiatext">Ubicación</p>
         </div>
-        <div class="contenedor">
-            <img src="./assets/miguel-deysi-03.jpeg" alt="Miguel abrazando a Deysi en la playa" class="image-reveal">
-        </div>
-        <div class="card">
-            <h1 class="title reveal">Nuestro felices por siempre</h1>
-            <p class="subtitle reveal-left">Hallé al que ama mi alma; lo busqué, y no lo dejé. Mi amado es mío, y
-                yo soy suya; él apacienta entre lirios.</p>
-            <p class="footer text image-reveal">Cantares 3:4</p>
-            <img src="assets/lu.png" alt="Pareja tomados de la mano" id="lu" class="quote-image fra image-reveal"
-                id="BW" />
-        </div>
-        <div class="contenedor">
-            <img src="./assets/miguel-deysi-04.jpeg" alt="Miguel y Deysi tomados de la mano" class="image-reveal">
-        </div>
-        <div class="contenedor">
-            <img src="./assets/miguel-deysi-05.jpeg" alt="Miguel y Deysi celebrando su amor" class="image-reveal">
-        </div>
-        <div class="contenedor">
-            <img src="./assets/miguel-deysi-06.jpeg" alt="Miguel y Deysi sonriendo juntos" class="image-reveal">
-        </div>
-        <div class="contenedor">
-            <img src="./assets/miguel-deysi-07.jpeg" alt="Miguel y Deysi frente al mar" class="image-reveal">
-        </div>
-        <div class="contenedor">
-            <img src="./assets/miguel-deysi-08.jpeg" alt="Miguel y Deysi en el salar" class="image-reveal">
-        </div>
+        <div class="toten3a"><a class="b2" href="https://maps.google.com/?q=-17.991411,-70.215431" target="_blank">¿Cómo
+                llegar?</a></div>
 
-        <img src="./assets/perlas.png" alt="Rosa decorativa" id="di" class="decorative-rose reveal" />
-        <section class="section">
-            <p class="text">Con nuestro amor, la presencia de Dios ante nosotros y la bendición de nuestros padres,
-                hemos decidido unirnos en matrimonio y celebrar nuestra unión con todos ustedes.
-            </p>
-
-            <h1 class="title reveal">Padres<br>de la Novia</h1>
-            <p class="subtitle reveal-left">Eduviges Huallpa Huanca<br>Viuda de Agustín Lipa</p>
-            <h1 class="title reveal">Padres<br>del Novio</h1>
-            <p class="subtitle reveal-left">
-                Nimia Hinojosa Ticona<br><br>Miguel Ángel Calderón Ticona</p>
-                
-                
-                <h1 class="title reveal">Padrinos</h1>
-            <p class="subtitle reveal-left">Miguel Ángel Calderón Ticona<br><br>Henry Ponce Monroy</p>
-    
-        </section>
-        <img src="./assets/2.png" alt="Rosa decorativa" class="decorative-rose reveal" />
-        <section class="section">
-            <h1 class="title reveal">Celebración</h1>
-            <p class="subtitle reveal-left" style="margin-bottom: 5px;">04:00 PM</p>
-            <p class="text">EL HUECO, POCOLLAY<br>Av. Celestino Vargas 1125<br>Tacna, Perú<br>Rogamos su puntualidad.</p>
-            <div class="toten3"><svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="80px" height="80px"
-                    viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
-                    <metadata>
-                        Created by potrace 1.15, written by Peter Selinger 2001-2017
-                    </metadata>
-                    <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="#b8780e"
-                        stroke="none">
-                        <path d="M6335 12360 c-516 -49 -1002 -220 -1425 -502 -175 -116 -281 -200
-                    -419 -333 -193 -185 -350 -375 -478 -579 -474 -754 -590 -1678 -313 -2516 26
-                    -80 241 -676 478 -1325 1892 -5186 2434 -6670 2436 -6672 2 -2 204 547 449
-                    1219 245 673 890 2440 1433 3928 542 1488 1004 2757 1026 2820 328 963 133
-                    2036 -516 2840 -100 125 -313 336 -446 443 -441 355 -936 572 -1505 658 -157
-                    23 -560 34 -720 19z m498 -1415 c381 -67 721 -314 901 -654 158 -301 190 -666
-                    85 -986 -153 -465 -564 -804 -1051 -865 -295 -37 -607 38 -861 207 -95 63
-                    -249 213 -320 310 -238 331 -301 753 -172 1140 65 195 159 347 305 493 184
-                    185 418 308 673 355 102 18 333 18 440 0z" />
+        <div class="toten4">
+            <div><svg width="100px" height="200px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M12 7V20M12 7H8.46429C7.94332 7 7.4437 6.78929 7.07533 6.41421C6.70695 6.03914 6.5 5.53043 6.5 5C6.5 4.46957 6.70695 3.96086 7.07533 3.58579C7.4437 3.21071 7.94332 3 8.46429 3C11.2143 3 12 7 12 7ZM12 7H15.5357C16.0567 7 16.5563 6.78929 16.9247 6.41421C17.293 6.03914 17.5 5.53043 17.5 5C17.5 4.46957 17.293 3.96086 16.9247 3.58579C16.5563 3.21071 16.0567 3 15.5357 3C12.7857 3 12 7 12 7ZM5 12H19V17.8C19 18.9201 19 19.4802 18.782 19.908C18.5903 20.2843 18.2843 20.5903 17.908 20.782C17.4802 21 16.9201 21 15.8 21H8.2C7.07989 21 6.51984 21 6.09202 20.782C5.71569 20.5903 5.40973 20.2843 5.21799 19.908C5 19.4802 5 18.9201 5 17.8V12ZM4.6 12H19.4C19.9601 12 20.2401 12 20.454 11.891C20.6422 11.7951 20.7951 11.6422 20.891 11.454C21 11.2401 21 10.9601 21 10.4V8.6C21 8.03995 21 7.75992 20.891 7.54601C20.7951 7.35785 20.6422 7.20487 20.454 7.10899C20.2401 7 19.9601 7 19.4 7H4.6C4.03995 7 3.75992 7 3.54601 7.10899C3.35785 7.20487 3.20487 7.35785 3.10899 7.54601C3 7.75992 3 8.03995 3 8.6V10.4C3 10.9601 3 11.2401 3.10899 11.454C3.20487 11.6422 3.35785 11.7951 3.54601 11.891C3.75992 12 4.03995 12 4.6 12Z"
+                            stroke="#10533b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </g>
                 </svg>
-                <p class="vendimiatext subtitle reveal-left">Ubicación</p>
-            </div>
-            <div class="toten3a"><a class="b2" href="https://maps.google.com/?q=-17.991411,-70.215431" target="_blank" rel="noopener">¿Cómo
-                    llegar?</a>
-            </div>
-        </section>
-        <img src="./assets/lagarto.png" alt="Rosa decorativa" class="decorative-rose reveal" />
-        <div class="vestimenta-container reveal">
-            <h1 class="title reveal">Código de<br>Vestimenta</h1>
-            <p class="subtitle reveal-left">Formal Elegante </p>
-
-            <div class="vestimenta-detalle reveal-left">
-                <div class="item reveal-left">
-                    <!-- Ícono de vestido -->
-                    <div class="icono">
-                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512.000000pt" height="512.000000pt"
-                            viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
-
-                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#b37e34"
-                                stroke="none">
-                                <path d="M1060 5109 c-25 -5 -76 -24 -115 -43 -162 -80 -262 -250 -280 -476
-                            -8 -93 12 -133 72 -149 23 -7 176 -11 398 -11 l360 0 148 -583 147 -583 0
-                            -155 0 -155 -71 -102 c-94 -137 -100 -187 -28 -231 23 -14 39 -17 65 -11 46
-                            11 50 14 124 124 l65 95 113 1 c61 0 112 -4 112 -9 0 -5 -16 -76 -36 -158
-                            -136 -567 -224 -1410 -224 -2148 0 -122 -3 -243 -6 -269 l-7 -46 -338 0 -339
-                            0 0 133 c0 379 58 869 146 1227 19 80 67 238 105 353 67 202 69 208 54 242
-                            -25 62 -105 80 -153 35 -46 -43 -170 -429 -231 -716 -54 -257 -90 -528 -111
-                            -832 -13 -201 -13 -567 0 -593 28 -51 -45 -49 1530 -49 1575 0 1502 -2 1530
-                            49 15 29 12 381 -5 642 -58 882 -283 1586 -696 2178 l-59 84 0 156 0 155 148
-                            583 147 583 360 0 c222 0 375 4 398 11 60 16 80 56 72 149 -18 227 -118 395
-                            -281 476 -221 110 -493 37 -624 -166 -24 -37 -88 -191 -90 -217 0 -1 -27 5
-                            -60 13 -277 64 -596 -14 -805 -198 l-35 -30 -35 30 c-209 184 -528 262 -805
-                            198 -33 -8 -60 -14 -60 -13 0 1 -13 39 -29 84 -35 102 -78 169 -144 229 -113
-                            101 -271 143 -427 113z m196 -204 c69 -20 127 -73 163 -148 16 -34 32 -74 35
-                            -89 l6 -28 -295 0 -295 0 6 28 c44 191 203 290 380 237z m2828 -16 c27 -13 62
-                            -39 78 -58 32 -36 71 -114 82 -163 l6 -28 -295 0 -295 0 6 28 c3 15 19 55 35
-                            89 35 73 93 127 159 148 64 21 165 14 224 -16z m-2022 -384 c155 -33 296 -106
-                            361 -188 123 -156 151 -156 273 -1 99 125 340 214 544 200 87 -5 169 -22 185
-                            -37 5 -6 -41 -208 -49 -217 -2 -1 -32 4 -67 13 -228 53 -493 -26 -681 -203
-                            l-68 -64 -68 64 c-188 177 -453 256 -681 203 -35 -9 -65 -14 -67 -13 -7 8 -54
-                            210 -50 217 4 6 51 19 131 35 49 9 170 5 237 -9z m32 -430 c135 -35 271 -134
-                            362 -261 47 -66 59 -74 104 -74 45 0 57 8 104 74 91 127 227 226 362 261 108
-                            28 294 14 294 -23 0 -9 -38 -165 -85 -348 -47 -183 -85 -336 -85 -339 0 -3
-                            -265 -5 -590 -5 -324 0 -590 2 -590 5 0 3 -38 156 -85 339 -47 183 -85 339
-                            -85 348 0 36 188 50 294 23z m1036 -980 l0 -65 -570 0 -570 0 0 65 0 65 570 0
-                            570 0 0 -65z m-381 -302 c107 -385 192 -942 234 -1537 l13 -189 32 -28 c36
-                            -32 69 -36 110 -15 56 29 57 42 38 309 -39 554 -113 1042 -221 1470 l-7 27
-                            113 0 114 0 72 -108 c273 -409 446 -835 552 -1357 58 -287 101 -721 101 -1022
-                            l0 -143 -339 0 -338 0 -7 61 c-3 34 -6 94 -6 134 0 64 -3 75 -25 98 -34 33
-                            -72 40 -115 19 -51 -25 -64 -70 -56 -204 l6 -108 -457 0 -458 0 3 232 c10 957
-                            94 1711 263 2361 l10 37 179 0 179 0 10 -37z" />
-                                <path d="M3060 795 c-85 -46 -51 -185 46 -185 46 0 80 24 94 65 15 44 4 80
-                            -32 110 -33 28 -70 31 -108 10z" />
-                                <path d="M1503 2458 c-25 -12 -53 -64 -53 -98 0 -31 62 -90 94 -90 93 0 141
-                            107 77 171 -31 31 -76 37 -118 17z" />
-                            </g>
-                        </svg>
-                    </div>
-                    <p class="rol reveal"><strong>DAMAS:</strong><br>VESTIDO LARGO<br><small>(NO BLANCO<br>O
-                            SIMILARES)</small></p>
-                </div>
-                <div class="item reveal-left">
-                    <!-- Ícono de terno -->
-                    <div class="icono">
-                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="626.000000pt" height="626.000000pt"
-                            viewBox="0 0 626.000000 626.000000" preserveAspectRatio="xMidYMid meet">
-
-                            <g transform="translate(0.000000,626.000000) scale(0.100000,-0.100000)" fill="#b37e34"
-                                stroke="none">
-                                <path d="M2465 6083 c-49 -6 -73 -23 -133 -97 -97 -119 -160 -182 -210 -208
-                            -48 -26 -701 -234 -962 -307 -238 -66 -347 -119 -444 -217 -121 -123 -196
-                            -285 -287 -619 -102 -373 -171 -811 -214 -1355 -8 -107 -24 -292 -35 -409 -18
-                            -197 -20 -296 -20 -1170 0 -526 3 -966 6 -978 3 -12 18 -30 33 -40 24 -17 62
-                            -18 463 -21 311 -2 444 0 459 8 49 27 49 18 49 935 l0 856 35 277 c39 298 93
-                            668 102 692 7 21 28 -41 59 -175 39 -169 80 -343 123 -530 23 -93 41 -182 41
-                            -197 0 -15 -14 -112 -30 -215 -17 -103 -42 -258 -55 -343 -25 -154 -47 -336
-                            -105 -880 -17 -157 -42 -383 -55 -503 -28 -244 -30 -295 -13 -332 20 -45 55
-                            -48 543 -42 410 5 458 7 545 26 242 54 414 145 561 298 66 68 154 192 178 251
-                            8 18 17 32 21 32 5 0 23 -25 41 -56 151 -265 393 -447 684 -514 121 -27 439
-                            -42 818 -38 264 3 298 5 313 20 26 25 29 112 10 268 -9 74 -23 207 -31 295
-                            -26 270 -75 729 -80 745 -5 18 -87 566 -131 875 l-17 120 32 135 c57 239 69
-                            292 111 470 62 265 74 310 82 302 4 -4 19 -88 33 -187 14 -99 32 -218 40 -265
-                            8 -47 27 -173 42 -280 l28 -195 0 -890 c0 -490 4 -900 8 -913 5 -12 17 -27 28
-                            -32 12 -7 178 -11 471 -10 440 0 453 1 473 20 20 20 20 34 23 978 2 608 -1
-                            1001 -8 1077 -6 66 -24 282 -40 480 -44 521 -85 831 -140 1060 -16 66 -50 206
-                            -75 310 -68 284 -108 392 -211 567 -96 163 -186 210 -709 368 -203 61 -444
-                            133 -535 161 -266 80 -277 86 -388 224 -79 98 -123 144 -154 161 -23 12 -134
-                            14 -685 13 -362 -1 -671 -4 -688 -6z m1155 -191 c0 -5 -64 -67 -142 -138 -79
-                            -71 -187 -171 -240 -222 -66 -64 -101 -91 -110 -86 -34 21 -467 438 -462 445
-                            7 11 954 12 954 1z m-1109 -129 c71 -60 444 -417 447 -429 1 -5 -36 -41 -83
-                            -78 -47 -37 -110 -90 -139 -117 l-55 -50 -39 68 c-101 173 -212 460 -212 548
-                            0 43 16 95 30 95 3 0 26 -17 51 -37z m1317 -58 c3 -44 -1 -82 -13 -117 -13
-                            -42 -208 -461 -221 -477 -9 -10 -51 21 -163 118 -67 57 -121 109 -120 115 0 6
-                            109 111 242 233 272 249 268 247 275 128z m-1558 -277 c33 -166 99 -459 110
-                            -488 5 -14 30 -95 55 -180 26 -85 53 -173 60 -195 8 -22 44 -139 81 -260 36
-                            -121 95 -314 131 -430 36 -115 75 -244 88 -285 13 -41 46 -144 73 -227 27 -84
-                            48 -153 46 -153 -1 0 -63 78 -136 173 -124 161 -391 502 -710 907 -76 96 -138
-                            180 -138 186 0 7 57 65 127 130 143 135 203 205 203 240 0 35 -51 80 -220 194
-                            -83 57 -153 106 -155 110 -8 12 336 390 354 390 4 0 18 -51 31 -112z m1809 74
-                            c76 -79 296 -336 296 -345 0 -6 -72 -59 -160 -119 -183 -124 -205 -145 -205
-                            -194 0 -32 13 -49 111 -152 61 -65 134 -139 161 -166 32 -31 46 -52 40 -60 -5
-                            -6 -189 -243 -408 -526 -220 -283 -435 -561 -478 -618 -44 -56 -81 -100 -83
-                            -98 -2 2 45 152 106 332 102 307 128 388 196 619 15 50 35 117 45 150 10 33
-                            40 132 65 220 26 88 66 225 90 305 23 80 57 208 74 285 67 298 94 405 104 405
-                            5 0 26 -17 46 -38z m511 -72 c85 -27 209 -65 275 -85 312 -96 435 -136 435
-                            -144 0 -5 -7 -14 -15 -21 -23 -19 -109 -158 -143 -231 -94 -201 -147 -383
-                            -237 -814 -49 -234 -82 -383 -176 -775 -187 -783 -191 -801 -185 -865 4 -33
-                            20 -132 36 -220 42 -230 49 -270 45 -273 -2 -2 -45 -12 -97 -22 -51 -11 -172
-                            -37 -268 -58 -96 -22 -211 -48 -254 -57 -54 -12 -86 -25 -103 -41 l-24 -24 3
-                            -204 c3 -190 5 -207 24 -233 26 -35 65 -40 159 -19 39 9 122 27 185 40 63 14
-                            189 41 279 61 90 20 165 34 167 33 1 -2 12 -93 23 -203 40 -390 81 -781 87
-                            -828 l7 -48 -429 3 c-427 4 -429 4 -514 30 -174 53 -302 130 -414 249 -156
-                            164 -236 351 -255 592 -6 68 -11 424 -11 792 l-1 668 34 36 c37 40 79 92 307
-                            381 85 107 204 258 265 335 468 590 721 918 749 974 13 25 14 36 5 54 -6 12
-                            -78 90 -161 173 l-149 150 159 106 c180 120 232 162 232 188 0 27 -43 85 -174
-                            228 -66 74 -122 138 -124 143 -4 9 32 0 258 -71z m-2696 18 c-175 -185 -222
-                            -237 -238 -271 -34 -72 -22 -85 229 -256 l139 -94 -156 -151 c-86 -83 -159
-                            -159 -162 -169 -3 -10 1 -32 8 -50 8 -18 300 -398 649 -846 l634 -814 6 -851
-                            c6 -961 9 -918 -73 -1081 -80 -160 -202 -279 -374 -365 -181 -90 -197 -93
-                            -684 -97 l-423 -4 6 33 c3 18 19 164 35 323 64 637 72 710 79 718 8 8 54 -1
-                            281 -54 291 -67 396 -89 426 -89 42 0 81 33 94 78 14 50 13 377 -1 404 -17 32
-                            -82 54 -279 92 -102 20 -245 51 -318 67 l-134 31 7 52 c4 28 20 132 37 231 36
-                            219 37 281 5 410 -13 55 -36 150 -51 210 -14 61 -60 254 -101 430 -88 368
-                            -140 597 -185 810 -45 212 -96 425 -127 525 -56 184 -142 373 -220 484 -19 26
-                            -31 52 -26 55 4 4 87 31 183 60 96 29 218 66 270 82 398 121 487 147 500 148
-                            8 1 -8 -23 -36 -51z m-1041 -395 c63 -92 203 -447 251 -638 33 -132 106 -501
-                            106 -537 0 -21 -12 -87 -26 -146 -14 -59 -36 -170 -49 -247 -155 -906 -147
-                            -826 -152 -1572 l-4 -613 -315 0 -314 0 0 676 c0 727 8 924 56 1404 14 140 34
-                            309 44 375 78 499 103 628 155 825 36 133 69 234 104 315 28 65 103 195 111
-                            195 4 0 19 -17 33 -37z m4671 -88 c105 -213 213 -670 286 -1215 11 -80 26
-                            -188 34 -240 8 -52 20 -174 26 -270 6 -96 17 -265 25 -375 9 -132 15 -431 17
-                            -880 l3 -680 -317 -3 -318 -2 0 583 c0 469 -3 606 -15 698 -9 63 -27 204 -40
-                            314 -14 110 -57 362 -96 560 -39 198 -74 380 -76 405 -3 30 10 116 37 250 96
-                            471 178 714 307 915 l45 69 24 -29 c13 -17 39 -61 58 -100z m-2683 -290 c-12
-                            -88 -28 -207 -36 -265 -8 -58 -15 -127 -15 -153 0 -64 -14 -52 -30 25 -6 35
-                            -22 97 -35 138 -64 207 -155 518 -155 528 0 6 13 -3 29 -19 43 -42 86 -40 148
-                            9 l48 39 33 -71 34 -71 -21 -160z m644 285 c10 -16 102 -60 126 -60 12 0 37
-                            17 57 38 20 20 33 30 30 21 -9 -24 -204 -678 -213 -714 l-8 -30 -7 25 c-5 14
-                            -8 50 -9 80 -1 30 -12 134 -26 230 -32 229 -32 274 3 355 27 65 35 74 47 55z
-                            m-1705 -3175 c85 -19 214 -48 285 -64 l130 -28 3 -78 3 -78 -48 7 c-26 3 -97
-                            17 -158 31 -60 13 -175 38 -255 55 -80 18 -146 32 -147 33 -4 5 21 157 26 157
-                            3 0 76 -16 161 -35z m2869 13 c5 -13 11 -48 15 -78 l7 -56 -123 -27 c-365 -80
-                            -449 -97 -467 -97 -19 0 -21 6 -21 75 0 69 2 75 23 80 12 3 105 24 207 46 102
-                            23 219 50 260 59 41 10 78 18 83 19 4 0 11 -9 16 -21z m-3671 -816 l3 -132
-                            -313 2 -313 3 -3 119 c-1 66 0 126 2 133 4 11 65 13 313 11 l308 -3 3 -133z
-                            m4936 12 c5 -72 4 -130 -1 -135 -5 -5 -145 -8 -319 -7 l-309 3 -3 127 -3 128
-                            203 3 c112 1 253 3 314 5 l111 2 7 -126z" />
-                                <path d="M3340 2628 c-28 -19 -36 -31 -38 -61 -6 -74 87 -126 144 -79 48 38
-                            56 87 22 127 -33 37 -84 43 -128 13z" />
-                                <path d="M3336 2138 c-54 -49 -24 -140 50 -148 41 -5 57 1 85 31 37 39 38 81
-                            4 114 -33 34 -103 35 -139 3z" />
-                                <path d="M3356 1675 c-38 -20 -55 -44 -56 -77 0 -41 38 -78 86 -85 33 -4 45
-                            -1 72 22 50 42 42 109 -18 140 -36 19 -48 19 -84 0z" />
-                            </g>
-                        </svg>
-                    </div>
-                    <p class="rol reveal"><strong>VARONES:</strong><br>TERNO COMPLETO<br></p>
-                </div>
+                <p class="templetext">Regalos</p>
             </div>
         </div>
-        <img src="./assets/perlas.png" id="di" alt="Rosa decorativa" class="decorative-rose reveal" />
-        <div class="totens">
-            <section class="section reveal-left">
-                <h1 class="title reveal">Regalos</h1>
-                <div><svg width="100px" height="200px" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M12 7V20M12 7H8.46429C7.94332 7 7.4437 6.78929 7.07533 6.41421C6.70695 6.03914 6.5 5.53043 6.5 5C6.5 4.46957 6.70695 3.96086 7.07533 3.58579C7.4437 3.21071 7.94332 3 8.46429 3C11.2143 3 12 7 12 7ZM12 7H15.5357C16.0567 7 16.5563 6.78929 16.9247 6.41421C17.293 6.03914 17.5 5.53043 17.5 5C17.5 4.46957 17.293 3.96086 16.9247 3.58579C16.5563 3.21071 16.0567 3 15.5357 3C12.7857 3 12 7 12 7ZM5 12H19V17.8C19 18.9201 19 19.4802 18.782 19.908C18.5903 20.2843 18.2843 20.5903 17.908 20.782C17.4802 21 16.9201 21 15.8 21H8.2C7.07989 21 6.51984 21 6.09202 20.782C5.71569 20.5903 5.40973 20.2843 5.21799 19.908C5 19.4802 5 18.9201 5 17.8V12ZM4.6 12H19.4C19.9601 12 20.2401 12 20.454 11.891C20.6422 11.7951 20.7951 11.6422 20.891 11.454C21 11.2401 21 10.9601 21 10.4V8.6C21 8.03995 21 7.75992 20.891 7.54601C20.7951 7.35785 20.6422 7.20487 20.454 7.10899C20.2401 7 19.9601 7 19.4 7H4.6C4.03995 7 3.75992 7 3.54601 7.10899C3.35785 7.20487 3.20487 7.35785 3.10899 7.54601C3 7.75992 3 8.03995 3 8.6V10.4C3 10.9601 3 11.2401 3.10899 11.454C3.20487 11.6422 3.35785 11.7951 3.54601 11.891C3.75992 12 4.03995 12 4.6 12Z"
-                                stroke="#b8780e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
+        <div class="toten4a"> <button class="b2" id="openModalBtn">Sugerencias</button></div>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Cualquier presente será apreciado de manera muy especial. Si deseas acompañarnos con un regalo,
+                también puedes realizar una transferencia o usar Yape/Plin.</p>
+            <div class="textlet">
+                <p class="textlet1"><strong>Interbank · Cuenta Simple Soles</strong><br>
+                    410 3134149360<br><br>
+                    <strong>CCI Interbank</strong><br>
+                    00341001313414936082<br><br>
+                    <strong>Yape o Plin</strong><br>
+                    994 759 530</p>
+            </div>
+            <div class="textlet">
+                <p class="textlet1">Miguel y Deysi</p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="script.js"></script>
+    <footer>
+        <div class="footergitfclick">
+            <p>
+                Desarrollado con <span class="heartfooter">♡</span> por <a href="https://www.facebook.com/giftclickbo"
+                    target="_blank" id="footerlink">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="933" height="533" fill="none" viewBox="0 0 933 533"
+                        id="svggiftclick">
+                        <path fill="#fff"
+                            d="M369.803 254.18H157.219A17.254 17.254 0 0 1 140 236.959v-12.18a17.255 17.255 0 0 1 17.219-17.221h212.584a17.255 17.255 0 0 1 17.219 17.221v12.18a17.254 17.254 0 0 1-17.219 17.221Zm-212.602-35.253a5.886 5.886 0 0 0-5.886 5.887v12.145a5.888 5.888 0 0 0 5.886 5.887h212.602a5.886 5.886 0 0 0 5.887-5.887v-12.18a5.888 5.888 0 0 0-5.887-5.887l-212.602.035Z" />
+                        <path fill="#fff"
+                            d="M258.629 216.847c-1.235 0-2.461-.203-3.63-.599-23.652-8.003-52.627-21.575-56.275-40.77-1.762-9.183 2.379-18.067 12.231-26.44 9.852-8.372 19.281-10.928 28.023-7.667 18.294 6.804 26.789 37.738 30.702 62.503a11.234 11.234 0 0 1-6.354 11.925 11.225 11.225 0 0 1-4.679 1.048h-.018Zm-.158-11.21 5.604-.899-5.604.899ZM231.593 151.4c-3.877 0-8.336 2.116-13.306 6.311-6.521 5.517-9.341 10.769-8.424 15.634 1.956 10.294 20.567 22.58 48.572 32.08-4.653-29.312-13.606-49.777-23.405-53.425a9.799 9.799 0 0 0-3.437-.6Z" />
+                        <path fill="#fff"
+                            d="M270.014 216.847a11.225 11.225 0 0 1-11.032-12.973c3.895-24.677 12.337-55.682 30.701-62.503 8.812-3.243 18.171-.67 28.023 7.668 9.852 8.337 13.976 17.238 12.231 26.439-3.648 19.195-32.622 32.767-56.274 40.77a11.319 11.319 0 0 1-3.649.599Zm27.054-65.447a9.803 9.803 0 0 0-3.437.6c-9.799 3.648-18.77 24.095-23.405 53.425 28.023-9.5 46.616-21.786 48.573-32.08.916-4.865-1.904-10.117-8.425-15.634-4.97-4.195-9.429-6.311-13.306-6.311ZM406.021 348.005c0-8.813.635-15.441 2.009-19.671 3.702-11.422 13.324-17.45 26.437-17.45 12.795 0 22.101 6.134 25.59 15.335.318.74.212 1.269-.423 1.586l-11.314 4.759c-.741.212-1.269 0-1.481-.529a13.48 13.48 0 0 0-12.337-7.403c-6.027 0-9.834 2.644-11.526 8.038-.74 2.327-1.163 7.403-1.163 15.335 0 7.932.423 13.114 1.163 15.44 1.692 5.288 5.604 7.932 11.738 7.932 5.498 0 10.151-2.749 11.526-7.403a26.44 26.44 0 0 0 .846-7.05.56.56 0 0 0-.635-.635h-9.728c-.74 0-1.058-.317-1.058-1.058v-10.152c0-.741.318-1.058 1.058-1.058h24.674c.74 0 1.057.317 1.057 1.058v5.922c.193 5.45-.4 10.9-1.762 16.181-3.525 11.422-13.43 17.979-26.225 17.979-13.113 0-22.735-6.028-26.437-17.45-1.374-4.266-2.009-10.893-2.009-19.706ZM475.179 324.632c-.74 0-1.057-.317-1.057-1.057v-10.471c0-.74.317-1.057 1.057-1.057h12.69c.74 0 1.057.317 1.057 1.057v10.471c0 .74-.317 1.057-1.057 1.057h-12.69Zm0 59.33c-.74 0-1.057-.317-1.057-1.057v-49.001c0-.741.317-1.058 1.057-1.058h12.69c.74 0 1.057.317 1.057 1.058v49.071c0 .74-.317 1.058-1.057 1.058l-12.69-.071ZM505.211 383.962c-.74 0-1.058-.317-1.058-1.057v-38.602a.556.556 0 0 0-.16-.474.558.558 0 0 0-.474-.16h-3.172c-.741 0-1.058-.318-1.058-1.058v-8.813c0-.741.317-1.058 1.058-1.058h3.172a.57.57 0 0 0 .474-.16.558.558 0 0 0 .16-.474v-2.433c0-12.338 5.711-17.626 17.977-17.626h5.816c.741 0 1.058.317 1.058 1.057v9.942c0 .74-.317 1.057-1.058 1.057h-3.278c-4.653 0-5.816 1.164-5.816 5.5v2.538a.57.57 0 0 0 .16.474.562.562 0 0 0 .475.16h8.354c.74 0 1.057.318 1.057 1.058v8.813c0 .74-.317 1.058-1.057 1.058h-8.354a.57.57 0 0 0-.475.16.556.556 0 0 0-.16.474v38.602c0 .74-.317 1.058-1.057 1.058l-12.584-.036ZM555.44 384.597c-11.738 0-16.285-5.182-16.285-17.027v-23.267a.556.556 0 0 0-.16-.474.558.558 0 0 0-.474-.16h-3.173c-.74 0-1.057-.318-1.057-1.058v-8.813c0-.741.317-1.058 1.057-1.058h3.173a.558.558 0 0 0 .61-.378.557.557 0 0 0 .024-.256v-13.749c0-.74.318-1.057 1.058-1.057h12.584c.74 0 1.057.317 1.057 1.057v13.749a.57.57 0 0 0 .378.61.57.57 0 0 0 .256.024h6.557c.74 0 1.057.317 1.057 1.058v8.813c0 .74-.317 1.058-1.057 1.058h-6.557a.557.557 0 0 0-.474.16.57.57 0 0 0-.16.474v22.632c0 3.808 1.269 5.077 4.653 5.077h2.538c.74 0 1.057.317 1.057 1.057v10.47c0 .741-.317 1.058-1.057 1.058h-5.605ZM571.408 348.004c0-8.989.634-15.546 2.009-19.388 3.807-11.528 12.901-17.627 25.59-17.627 12.161 0 20.938 5.817 25.062 15.97.317.634.212 1.057-.529 1.269l-11.526 5.182a.951.951 0 0 1-1.48-.529c-2.327-5.393-6.134-8.143-11.421-8.143a10.397 10.397 0 0 0-10.786 7.932c-.74 2.432-1.163 7.509-1.163 15.44 0 7.932.423 13.008 1.163 15.441a10.4 10.4 0 0 0 10.786 7.932c5.287 0 9.094-2.75 11.421-8.144a.95.95 0 0 1 1.48-.528l11.526 5.182c.741.211.846.634.529 1.269-4.124 10.153-12.901 15.969-25.062 15.969-12.689 0-21.783-6.134-25.59-17.626-1.375-4.054-2.009-10.611-2.009-19.601ZM649.554 384.597c-11.315 0-15.862-4.865-15.862-16.287v-55.206c0-.74.317-1.057 1.058-1.057h12.689c.74 0 1.058.317 1.058 1.057v54.043c0 3.278 1.48 4.865 4.441 4.865h2.221c.74 0 1.057.317 1.057 1.057v10.47c0 .741-.317 1.058-1.057 1.058h-5.605ZM667.108 324.632c-.74 0-1.058-.317-1.058-1.057v-10.471c0-.74.318-1.057 1.058-1.057h12.689c.741 0 1.058.317 1.058 1.057v10.471c0 .74-.317 1.057-1.058 1.057h-12.689Zm0 59.33c-.74 0-1.058-.317-1.058-1.057v-49.001c0-.741.318-1.058 1.058-1.058h12.689c.741 0 1.058.317 1.058 1.058v49.071c0 .74-.317 1.058-1.058 1.058l-12.689-.071ZM693.227 370.637a48.211 48.211 0 0 1 0-24.536c2.961-9.412 11.103-14.489 22.101-14.489a22.704 22.704 0 0 1 19.387 9.624 1.054 1.054 0 0 1 .208.785 1.048 1.048 0 0 1-.42.696l-9.2 6.028a1.061 1.061 0 0 1-1.265.104 1.063 1.063 0 0 1-.321-.316 9.682 9.682 0 0 0-8.142-4.441 7.454 7.454 0 0 0-7.931 5.499 40.933 40.933 0 0 0 0 17.626 7.453 7.453 0 0 0 7.931 5.464 9.676 9.676 0 0 0 8.142-4.442 1.06 1.06 0 0 1 1.586-.211l9.2 6.028a1.048 1.048 0 0 1 .42.696 1.045 1.045 0 0 1-.208.785 22.704 22.704 0 0 1-19.387 9.624c-10.998-.036-19.14-5.112-22.101-14.524ZM778.141 383.962a1.751 1.751 0 0 1-.948-.296 1.751 1.751 0 0 1-.638-.761l-11.421-20.623-5.287 6.557v14.101c0 .74-.317 1.058-1.058 1.058H746.1c-.74 0-1.058-.318-1.058-1.058v-69.8c0-.741.318-1.058 1.058-1.058h12.689c.741 0 1.058.317 1.058 1.058v38.778l14.699-18.085a2.548 2.548 0 0 1 2.009-1.058h13.535a.619.619 0 0 1 .423 1.058l-15.65 18.085 17.871 30.987c.211.423.106 1.057-.529 1.057h-14.064ZM359.564 242.828H168.639a21.874 21.874 0 0 0-21.854 21.857v106.234a21.868 21.868 0 0 0 21.854 21.856h190.925a21.868 21.868 0 0 0 21.854-21.856V264.614a21.872 21.872 0 0 0-21.854-21.786ZM334.89 351.301l16.937 30.194h-9.359l-15.139-29.666a7.478 7.478 0 0 0-5.288-3.983 7.624 7.624 0 0 0-1.374-.124 7.456 7.456 0 0 0-5.164 2.045l-4.776 4.354v-48.42l34.138 34.372h-3.525a7.528 7.528 0 0 0-6.398 3.779 7.525 7.525 0 0 0-.035 7.431l-.017.018Zm35.142 19.618a10.577 10.577 0 0 1-5.816 9.394l-16.302-29.065 6.168-.106a7.524 7.524 0 0 0 7.332-8.99 7.522 7.522 0 0 0-2.044-3.842l-46.987-47.309a7.523 7.523 0 0 0-12.865 5.288v66.31a7.526 7.526 0 0 0 12.601 5.57l7.473-6.804 10.222 20.041H168.639a10.575 10.575 0 0 1-10.574-10.576V264.526a10.575 10.575 0 0 1 10.574-10.576h190.925a10.576 10.576 0 0 1 10.574 10.576l-.106 106.393Z" />
+                        <path fill="#fff"
+                            d="m356.303 378.551-17.377-30.97a1.624 1.624 0 0 1 .009-1.603 1.625 1.625 0 0 1 1.383-.811l11.015-.194a1.624 1.624 0 0 0 1.482-1.01 1.625 1.625 0 0 0-.354-1.758l-41.223-41.51a1.626 1.626 0 0 0-1.78-.37 1.627 1.627 0 0 0-1.005 1.516v58.167a1.617 1.617 0 0 0 .967 1.484 1.617 1.617 0 0 0 1.747-.285l9.799-8.937a1.63 1.63 0 0 1 1.383-.399 1.623 1.623 0 0 1 1.155.857l14.664 28.749h16.108l1.34-.705a1.626 1.626 0 0 0 .687-2.221Z" />
                     </svg>
-                </div>
-                <p class="text">Tu presencia es nuestro mejor regalo. Si deseas acompañarnos con un presente, será recibido con especial cariño y gratitud.</p>
-            </section>
-            <div class="toten2">
-                <img src="./assets/perlas.png" id="di" alt="Rosa decorativa" class="decorative-rose reveal" />
-                <div class="subtitle reveal-left" style="text-align: center;">
-                    ¡LOS ESPERAMOS PARA CELEBRAR NUESTRA BODA!
-                </div>
-                <div class="header">
-                    <div class="divider1"></div>
-                    <p class="text" style="text-align: center;">Nota: Invitación según la cantidad de pases asignados.</p>
-                </div>
-                <div class="personal" style="margin-top: 50px;">
-                    <div class="section-title title" id="passes-title" style="margin-bottom: 25px;">Pase</div>
-                    <h1 class="footer subtitle" id="name"
-                        style="text-align: center; font-size:30px; font-weight: bold; margin-block: 5px;"></h1>
-                    <div class="footer subtitle reveal-left" style="margin-bottom: 5px;">
-                        Tenemos <span class="footer" id="reserved-phrase">Reservado</span> <br>
-                    </div>
-                    <p id="passnumbers" class="subtitle reveal-left">1</p>
-                    <div class="footer text" id="places-text" style="margin-top:10px">
-                        Lugar
-                    </div>
-                </div>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        let rawParam = window.location.search.substring(1);
-
-                        rawParam = rawParam.replace(/\+/g, ' ');
-
-                        let decoded = rawParam;
-                        let previous;
-                        do {
-                            previous = decoded;
-                            try {
-                                decoded = decodeURIComponent(decoded);
-                            } catch (e) {
-                                console.warn("No se pudo decodificar completamente:", e);
-                                break;
-                            }
-                        } while (decoded !== previous);
-
-                        const parts = decoded.split('-');
-
-                        if (parts.length >= 3) {
-                            const firstName = parts[0].trim();
-                            const lastName = parts[1].trim();
-                            const numPasses = parts[2].trim();
-
-                            document.getElementById('name').textContent = `${firstName} ${lastName}`;
-                            document.getElementById('passnumbers').textContent = numPasses;
-
-                            const reservedText = document.getElementById('reserved-phrase');
-                            const passesTitle = document.getElementById('passes-title');
-                            const placesText = document.getElementById('places-text');
-
-                            if (numPasses === "1") {
-                                passesTitle.textContent = "Pase";
-                                placesText.textContent = "Lugar";
-                                reservedText.textContent = "Reservado";
-                            } else {
-                                passesTitle.textContent = "Pases";
-                                placesText.textContent = "Lugares";
-                                reservedText.textContent = "Reservados";
-                            }
-                        }
-                    });
-                </script>
-                <style>
-                    #passnumbers {
-                        border: 3px solid #b37e34;
-                        text-align: center;
-                        padding-inline: 50px;
-                        font-size: 80px;
-                        margin: 15px;
-                    }
-
-                    .personal {
-                        display: flex;
-                        justify-items: center;
-                        align-items: center;
-                        flex-direction: column;
-                    }
-                </style>
-                <svg class="anim-fiesta" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130" width="130"
-                    height="130" preserveAspectRatio="xMidYMid meet">
-                    <defs>
-                        <clipPath id="__lottie_element_36">
-                            <rect width="130" height="130" x="0" y="0"></rect>
-                        </clipPath>
-                    </defs>
-                    <g clip-path="url(#__lottie_element_36)">
-                        <g transform="matrix(1,0,0,1,4.901298522949219,11.877037048339844)" opacity="0.7761166198485527"
-                            style="display: block;">
-                            <g opacity="1" transform="matrix(1,0,0,1,75.55999755859375,23.030000686645508)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M9.35200023651123,-2.2809998989105225 C9.166999816894531,-2.8489999771118164 8.673999786376953,-3.26200008392334 8.083000183105469,-3.3480000495910645 C8.083000183105469,-3.3480000495910645 3.4709999561309814,-4.019999980926514 3.4709999561309814,-4.019999980926514 C3.4709999561309814,-4.019999980926514 1.4149999618530273,-8.197999954223633 1.4149999618530273,-8.197999954223633 C0.9570000171661377,-8.97700023651123 -0.04600000008940697,-9.236000061035156 -0.824999988079071,-8.777000427246094 C-1.0640000104904175,-8.63599967956543 -1.2630000114440918,-8.437999725341797 -1.4049999713897705,-8.197999954223633 C-1.4049999713897705,-8.197999954223633 -3.4709999561309814,-4.019999980926514 -3.4709999561309814,-4.019999980926514 C-3.4709999561309814,-4.019999980926514 -8.083000183105469,-3.3480000495910645 -8.083000183105469,-3.3480000495910645 C-8.942000389099121,-3.2239999771118164 -9.536999702453613,-2.427999973297119 -9.413000106811523,-1.5700000524520874 C-9.36299991607666,-1.2280000448226929 -9.204000473022461,-0.9120000004768372 -8.956999778747559,-0.6700000166893005 C-8.956999778747559,-0.6700000166893005 -5.619999885559082,2.5829999446868896 -5.619999885559082,2.5829999446868896 C-5.619999885559082,2.5829999446868896 -6.406000137329102,7.176000118255615 -6.406000137329102,7.176000118255615 C-6.557000160217285,8.029999732971191 -5.986999988555908,8.845000267028809 -5.131999969482422,8.996000289916992 C-4.788000106811523,9.057000160217285 -4.433000087738037,9.001999855041504 -4.125,8.83899974822998 C-4.125,8.83899974822998 0.0010000000474974513,6.663000106811523 0.0010000000474974513,6.663000106811523 C0.0010000000474974513,6.663000106811523 4.125999927520752,8.833000183105469 4.125999927520752,8.833000183105469 C4.894000053405762,9.237000465393066 5.8429999351501465,8.940999984741211 6.247000217437744,8.17300033569336 C6.4079999923706055,7.867000102996826 6.464000225067139,7.515999794006348 6.406000137329102,7.176000118255615 C6.406000137329102,7.176000118255615 5.619999885559082,2.5829999446868896 5.619999885559082,2.5829999446868896 C5.619999885559082,2.5829999446868896 8.956000328063965,-0.6700000166893005 8.956000328063965,-0.6700000166893005 C9.383999824523926,-1.0889999866485596 9.538000106811523,-1.7130000591278076 9.35200023651123,-2.2809998989105225z">
-                                </path>
-                            </g>
-                        </g>
-                        <g transform="matrix(1,0,0,1,-12.5,-20)" opacity="1" style="display: block;">
-                            <g opacity="1" transform="matrix(1,0,0,1,56.909000396728516,38.75400161743164)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M5.057000160217285,0 C5.057000160217285,2.7929999828338623 2.7929999828338623,5.057000160217285 0,5.057000160217285 C-2.7929999828338623,5.057000160217285 -5.057000160217285,2.7929999828338623 -5.057000160217285,0 C-5.057000160217285,-2.7920000553131104 -2.7929999828338623,-5.057000160217285 0,-5.057000160217285 C2.7929999828338623,-5.057000160217285 5.057000160217285,-2.7920000553131104 5.057000160217285,0z">
-                                </path>
-                            </g>
-                        </g>
-                        <g transform="matrix(1,0,0,1,1.6558074951171875,2.271503448486328)" opacity="0.4720528386105976"
-                            style="display: block;">
-                            <g opacity="1" transform="matrix(1,0,0,1,98.23699951171875,85.31300354003906)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M5.057000160217285,0 C5.057000160217285,2.7929999828338623 2.7929999828338623,5.057000160217285 0,5.057000160217285 C-2.7929999828338623,5.057000160217285 -5.057000160217285,2.7929999828338623 -5.057000160217285,0 C-5.057000160217285,-2.7929999828338623 -2.7929999828338623,-5.057000160217285 0,-5.057000160217285 C2.7929999828338623,-5.057000160217285 5.057000160217285,-2.7929999828338623 5.057000160217285,0z">
-                                </path>
-                            </g>
-                        </g>
-                        <g transform="matrix(1,0,0,1,9.500003814697266,4.5)" opacity="0.7761166198485527"
-                            style="display: block;">
-                            <g opacity="1" transform="matrix(1,0,0,1,85.64399719238281,46.60100173950195)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M-0.9639999866485596,-0.871999979019165 C-0.9639999866485596,-0.871999979019165 0.9639999866485596,0.871999979019165 0.9639999866485596,0.871999979019165">
-                                </path>
-                            </g>
-                            <g opacity="1" transform="matrix(1,0,0,1,91.30599975585938,43.941001892089844)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M-0.04399999976158142,-1.7879999876022339 C-0.04399999976158142,-1.7879999876022339 0.04399999976158142,1.7879999876022339 0.04399999976158142,1.7879999876022339">
-                                </path>
-                            </g>
-                            <g opacity="1" transform="matrix(1,0,0,1,0,0)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M91.3479995727539,58.45899963378906 C91.3479995727539,58.45899963378906 91.3479995727539,61.78499984741211 91.3479995727539,61.78499984741211">
-                                </path>
-                            </g>
-                            <g opacity="1" transform="matrix(1,0,0,1,96.86199951171875,57.849998474121094)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M-1.1540000438690186,-1.1349999904632568 C-1.1540000438690186,-1.1349999904632568 1.1540000438690186,1.1349999904632568 1.1540000438690186,1.1349999904632568">
-                                </path>
-                            </g>
-                            <g opacity="1" transform="matrix(1,0,0,1,0,0)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M97.88800048828125,52.356998443603516 C97.88800048828125,52.356998443603516 100.50399780273438,52.356998443603516 100.50399780273438,52.356998443603516">
-                                </path>
-                            </g>
-                            <g opacity="1" transform="matrix(1,0,0,1,96.9729995727539,46.66899871826172)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M-1.003000020980835,0.9779999852180481 C-1.003000020980835,0.9779999852180481 1.003000020980835,-0.9779999852180481 1.003000020980835,-0.9779999852180481">
-                                </path>
-                            </g>
-                        </g>
-                        <g transform="matrix(1,0,0,1,9.500003814697266,4.5)" opacity="1" style="display: block;">
-                            <g opacity="1" transform="matrix(1,0,0,1,69.16699981689453,74.1520004272461)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d="  M-17.038000106811523,2.071000099182129 C-17.038000106811523,2.071000099182129 2.2160000801086426,-4.184999942779541 13.038000106811523,2.184999942779541">
-                                </path>
-                            </g>
-                        </g>
-                        <g transform="matrix(1,0,0,1,9.500003814697266,4.5)" opacity="1" style="display: block;">
-                            <g opacity="1" transform="matrix(1,0,0,1,72.7030029296875,60.55099868774414)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M-17.339000701904297,8.194999694824219 C-17.339000701904297,8.194999694824219 17.339000701904297,-8.194999694824219 17.339000701904297,-8.194999694824219">
-                                </path>
-                            </g>
-                        </g>
-                        <g transform="matrix(1,0,0,1,9.500003814697266,4.5)" opacity="1" style="display: block;">
-                            <g opacity="1"
-                                transform="matrix(-0.9933285713195801,0.11531856656074524,-0.11531856656074524,-0.9933285713195801,53.858001708984375,59.505001068115234)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M8.631999969482422,-7.672999858856201 C8.631999969482422,-7.672999858856201 -6.659999847412109,5.920000076293945 -8.460000038146973,7.519999980926514">
-                                </path>
-                            </g>
-                        </g>
-                        <g transform="matrix(1,0,0,1,9.500003814697266,4.5)" opacity="1" style="display: block;">
-                            <g opacity="1" transform="matrix(1,0,0,1,43.04600143432617,48.16999816894531)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M-0.4359999895095825,-17.263999938964844 C-0.4359999895095825,-17.263999938964844 4.620999813079834,-2.7899999618530273 -4.620999813079834,17.263999938964844">
-                                </path>
-                            </g>
-                        </g>
-                        <g transform="matrix(0.9204199910163879,0,0,0.8299999833106995,8.79580020904541,24.540000915527344)"
-                            opacity="1" style="display: block;">
-                            <g opacity="1" transform="matrix(1,0,0,1,47.23099899291992,67.61399841308594)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M-15.63599967956543,-22.611000061035156 C-15.63599967956543,-22.611000061035156 -27.988000869750977,-24.674999237060547 -21.011999130249023,-10.725000381469727 C-21.011999130249023,-10.725000381469727 -8.109000205993652,18.570999145507812 17.177000045776367,23.628000259399414 C17.177000045776367,23.628000259399414 27.988000869750977,24.674999237060547 21.542999267578125,11.519000053405762">
-                                </path>
-                            </g>
-                            <g opacity="1" transform="matrix(1,0,0,1,33.63600158691406,79.23300170898438)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M-15.468999862670898,-18.809999465942383 C-15.468999862670898,-18.809999465942383 -12.083000183105469,10.090999603271484 15.468999862670898,18.809999465942383">
-                                </path>
-                            </g>
-                            <g opacity="1" transform="matrix(1,0,0,1,20.20199966430664,92.8290023803711)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="#cc8e30" stroke-opacity="1" stroke-width="3.531"
-                                    d=" M-4.409999847412109,-13.758999824523926 C-4.409999847412109,-13.758999824523926 -6.888000011444092,7.829999923706055 6.888000011444092,13.758999824523926">
-                                </path>
-                            </g>
-                            <g opacity="1" transform="matrix(1,0,0,1,37.63999938964844,102.40299987792969)">
-                                <path stroke-linecap="round" stroke-linejoin="miter" fill-opacity="0"
-                                    stroke-miterlimit="10" stroke="rgb(175,133,102)" stroke-opacity="1"
-                                    stroke-width="10"
-                                    d=" M-26.767000198364258,-2.0920000076293945 C-26.767000198364258,-2.0920000076293945 -29.382999420166016,11.16100025177002 -29.382999420166016,11.16100025177002 C-29.382999420166016,11.16100025177002 29.382999420166016,-11.16100025177002 29.382999420166016,-11.16100025177002">
-                                </path>
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-                <p class="subtitle reveal-left">Confirmar<br>Asistencia</p>
-            </div>
-            <div class="toten2a"><a target="_blank" rel="noopener" class="b2"
-                    href="https://wa.me/51994759530?text=S%C3%AD%2C%20podr%C3%A9%20asistir%20a%20la%20boda%20de%20Miguel%20y%20Deysi%20el%206%20de%20septiembre.%20Mis%20nombres%20y%20apellidos%20son...">Confirmar con la novia</a>
-            </div>
+                </a>
+            </p>
         </div>
-
-        <section class="indicaciones reveal active">
-            <h2 class="subtitle reveal active">Indicaciones importantes</h2>
-            <ul class="subtitle reveal active">
-                <li>Por favor, necesitamos tu puntualidad.</li><br>
-                <li>Es necesario que puedas confirmarnos tu asistencia. Nos ayudará con la planificación.</li><br>
-                <li>Amamos a sus pequeños, pero creemos que estarán más cómodos y seguros en casa. ¡Noche libre para los
-                    adultos!"</li>
-            </ul>
-        </section>
-        <div class="contenedor">
-            <img src="./assets/miguel-deysi-09.jpeg" alt="Miguel y Deysi juntos" class="image-reveal">
-        </div>
-        <div style="text-align: center;">
-            <img src="./assets/rana.png" alt="Rosa decorativa" id="rana" class="decorative-rose reveal"
-                style="margin-top: 25px;" />
-        </div>
-        <div id="ron"> Desarrollado con <span class="heartfooter">♡</div>
-        <footer>
-            <div class="footergitfclick">
-                <p>
-                    por <a href="https://www.facebook.com/giftclickbo" target="_blank" id="footerlink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="933" height="533" fill="none"
-                            viewBox="0 0 933 533" id="svggiftclick">
-                            <path fill="#ffffff"
-                                d="M369.803 254.18H157.219A17.254 17.254 0 0 1 140 236.959v-12.18a17.255 17.255 0 0 1 17.219-17.221h212.584a17.255 17.255 0 0 1 17.219 17.221v12.18a17.254 17.254 0 0 1-17.219 17.221Zm-212.602-35.253a5.886 5.886 0 0 0-5.886 5.887v12.145a5.888 5.888 0 0 0 5.886 5.887h212.602a5.886 5.886 0 0 0 5.887-5.887v-12.18a5.888 5.888 0 0 0-5.887-5.887l-212.602.035Z" />
-                            <path fill="#ffffff"
-                                d="M258.629 216.847c-1.235 0-2.461-.203-3.63-.599-23.652-8.003-52.627-21.575-56.275-40.77-1.762-9.183 2.379-18.067 12.231-26.44 9.852-8.372 19.281-10.928 28.023-7.667 18.294 6.804 26.789 37.738 30.702 62.503a11.234 11.234 0 0 1-6.354 11.925 11.225 11.225 0 0 1-4.679 1.048h-.018Zm-.158-11.21 5.604-.899-5.604.899ZM231.593 151.4c-3.877 0-8.336 2.116-13.306 6.311-6.521 5.517-9.341 10.769-8.424 15.634 1.956 10.294 20.567 22.58 48.572 32.08-4.653-29.312-13.606-49.777-23.405-53.425a9.799 9.799 0 0 0-3.437-.6Z" />
-                            <path fill="#ffffff"
-                                d="M270.014 216.847a11.225 11.225 0 0 1-11.032-12.973c3.895-24.677 12.337-55.682 30.701-62.503 8.812-3.243 18.171-.67 28.023 7.668 9.852 8.337 13.976 17.238 12.231 26.439-3.648 19.195-32.622 32.767-56.274 40.77a11.319 11.319 0 0 1-3.649.599Zm27.054-65.447a9.803 9.803 0 0 0-3.437.6c-9.799 3.648-18.77 24.095-23.405 53.425 28.023-9.5 46.616-21.786 48.573-32.08.916-4.865-1.904-10.117-8.425-15.634-4.97-4.195-9.429-6.311-13.306-6.311ZM406.021 348.005c0-8.813.635-15.441 2.009-19.671 3.702-11.422 13.324-17.45 26.437-17.45 12.795 0 22.101 6.134 25.59 15.335.318.74.212 1.269-.423 1.586l-11.314 4.759c-.741.212-1.269 0-1.481-.529a13.48 13.48 0 0 0-12.337-7.403c-6.027 0-9.834 2.644-11.526 8.038-.74 2.327-1.163 7.403-1.163 15.335 0 7.932.423 13.114 1.163 15.44 1.692 5.288 5.604 7.932 11.738 7.932 5.498 0 10.151-2.749 11.526-7.403a26.44 26.44 0 0 0 .846-7.05.56.56 0 0 0-.635-.635h-9.728c-.74 0-1.058-.317-1.058-1.058v-10.152c0-.741.318-1.058 1.058-1.058h24.674c.74 0 1.057.317 1.057 1.058v5.922c.193 5.45-.4 10.9-1.762 16.181-3.525 11.422-13.43 17.979-26.225 17.979-13.113 0-22.735-6.028-26.437-17.45-1.374-4.266-2.009-10.893-2.009-19.706ZM475.179 324.632c-.74 0-1.057-.317-1.057-1.057v-10.471c0-.74.317-1.057 1.057-1.057h12.69c.74 0 1.057.317 1.057 1.057v10.471c0 .74-.317 1.057-1.057 1.057h-12.69Zm0 59.33c-.74 0-1.057-.317-1.057-1.057v-49.001c0-.741.317-1.058 1.057-1.058h12.69c.74 0 1.057.317 1.057 1.058v49.071c0 .74-.317 1.058-1.057 1.058l-12.69-.071ZM505.211 383.962c-.74 0-1.058-.317-1.058-1.057v-38.602a.556.556 0 0 0-.16-.474.558.558 0 0 0-.474-.16h-3.172c-.741 0-1.058-.318-1.058-1.058v-8.813c0-.741.317-1.058 1.058-1.058h3.172a.57.57 0 0 0 .474-.16.558.558 0 0 0 .16-.474v-2.433c0-12.338 5.711-17.626 17.977-17.626h5.816c.741 0 1.058.317 1.058 1.057v9.942c0 .74-.317 1.057-1.058 1.057h-3.278c-4.653 0-5.816 1.164-5.816 5.5v2.538a.57.57 0 0 0 .16.474.562.562 0 0 0 .475.16h8.354c.74 0 1.057.318 1.057 1.058v8.813c0 .74-.317 1.058-1.057 1.058h-8.354a.57.57 0 0 0-.475.16.556.556 0 0 0-.16.474v38.602c0 .74-.317 1.058-1.057 1.058l-12.584-.036ZM555.44 384.597c-11.738 0-16.285-5.182-16.285-17.027v-23.267a.556.556 0 0 0-.16-.474.558.558 0 0 0-.474-.16h-3.173c-.74 0-1.057-.318-1.057-1.058v-8.813c0-.741.317-1.058 1.057-1.058h3.173a.558.558 0 0 0 .61-.378.557.557 0 0 0 .024-.256v-13.749c0-.74.318-1.057 1.058-1.057h12.584c.74 0 1.057.317 1.057 1.057v13.749a.57.57 0 0 0 .378.61.57.57 0 0 0 .256.024h6.557c.74 0 1.057.317 1.057 1.058v8.813c0 .74-.317 1.058-1.057 1.058h-6.557a.557.557 0 0 0-.474.16.57.57 0 0 0-.16.474v22.632c0 3.808 1.269 5.077 4.653 5.077h2.538c.74 0 1.057.317 1.057 1.057v10.47c0 .741-.317 1.058-1.057 1.058h-5.605ZM571.408 348.004c0-8.989.634-15.546 2.009-19.388 3.807-11.528 12.901-17.627 25.59-17.627 12.161 0 20.938 5.817 25.062 15.97.317.634.212 1.057-.529 1.269l-11.526 5.182a.951.951 0 0 1-1.48-.529c-2.327-5.393-6.134-8.143-11.421-8.143a10.397 10.397 0 0 0-10.786 7.932c-.74 2.432-1.163 7.509-1.163 15.44 0 7.932.423 13.008 1.163 15.441a10.4 10.4 0 0 0 10.786 7.932c5.287 0 9.094-2.75 11.421-8.144a.95.95 0 0 1 1.48-.528l11.526 5.182c.741.211.846.634.529 1.269-4.124 10.153-12.901 15.969-25.062 15.969-12.689 0-21.783-6.134-25.59-17.626-1.375-4.054-2.009-10.611-2.009-19.601ZM649.554 384.597c-11.315 0-15.862-4.865-15.862-16.287v-55.206c0-.74.317-1.057 1.058-1.057h12.689c.74 0 1.058.317 1.058 1.057v54.043c0 3.278 1.48 4.865 4.441 4.865h2.221c.74 0 1.057.317 1.057 1.057v10.47c0 .741-.317 1.058-1.057 1.058h-5.605ZM667.108 324.632c-.74 0-1.058-.317-1.058-1.057v-10.471c0-.74.318-1.057 1.058-1.057h12.689c.741 0 1.058.317 1.058 1.057v10.471c0 .74-.317 1.057-1.058 1.057h-12.689Zm0 59.33c-.74 0-1.058-.317-1.058-1.057v-49.001c0-.741.318-1.058 1.058-1.058h12.689c.741 0 1.058.317 1.058 1.058v49.071c0 .74-.317 1.058-1.058 1.058l-12.689-.071ZM693.227 370.637a48.211 48.211 0 0 1 0-24.536c2.961-9.412 11.103-14.489 22.101-14.489a22.704 22.704 0 0 1 19.387 9.624 1.054 1.054 0 0 1 .208.785 1.048 1.048 0 0 1-.42.696l-9.2 6.028a1.061 1.061 0 0 1-1.265.104 1.063 1.063 0 0 1-.321-.316 9.682 9.682 0 0 0-8.142-4.441 7.454 7.454 0 0 0-7.931 5.499 40.933 40.933 0 0 0 0 17.626 7.453 7.453 0 0 0 7.931 5.464 9.676 9.676 0 0 0 8.142-4.442 1.06 1.06 0 0 1 1.586-.211l9.2 6.028a1.048 1.048 0 0 1 .42.696 1.045 1.045 0 0 1-.208.785 22.704 22.704 0 0 1-19.387 9.624c-10.998-.036-19.14-5.112-22.101-14.524ZM778.141 383.962a1.751 1.751 0 0 1-.948-.296 1.751 1.751 0 0 1-.638-.761l-11.421-20.623-5.287 6.557v14.101c0 .74-.317 1.058-1.058 1.058H746.1c-.74 0-1.058-.318-1.058-1.058v-69.8c0-.741.318-1.058 1.058-1.058h12.689c.741 0 1.058.317 1.058 1.058v38.778l14.699-18.085a2.548 2.548 0 0 1 2.009-1.058h13.535a.619.619 0 0 1 .423 1.058l-15.65 18.085 17.871 30.987c.211.423.106 1.057-.529 1.057h-14.064ZM359.564 242.828H168.639a21.874 21.874 0 0 0-21.854 21.857v106.234a21.868 21.868 0 0 0 21.854 21.856h190.925a21.868 21.868 0 0 0 21.854-21.856V264.614a21.872 21.872 0 0 0-21.854-21.786ZM334.89 351.301l16.937 30.194h-9.359l-15.139-29.666a7.478 7.478 0 0 0-5.288-3.983 7.624 7.624 0 0 0-1.374-.124 7.456 7.456 0 0 0-5.164 2.045l-4.776 4.354v-48.42l34.138 34.372h-3.525a7.528 7.528 0 0 0-6.398 3.779 7.525 7.525 0 0 0-.035 7.431l-.017.018Zm35.142 19.618a10.577 10.577 0 0 1-5.816 9.394l-16.302-29.065 6.168-.106a7.524 7.524 0 0 0 7.332-8.99 7.522 7.522 0 0 0-2.044-3.842l-46.987-47.309a7.523 7.523 0 0 0-12.865 5.288v66.31a7.526 7.526 0 0 0 12.601 5.57l7.473-6.804 10.222 20.041H168.639a10.575 10.575 0 0 1-10.574-10.576V264.526a10.575 10.575 0 0 1 10.574-10.576h190.925a10.576 10.576 0 0 1 10.574 10.576l-.106 106.393Z" />
-                            <path fill="#ffffff"
-                                d="m356.303 378.551-17.377-30.97a1.624 1.624 0 0 1 .009-1.603 1.625 1.625 0 0 1 1.383-.811l11.015-.194a1.624 1.624 0 0 0 1.482-1.01 1.625 1.625 0 0 0-.354-1.758l-41.223-41.51a1.626 1.626 0 0 0-1.78-.37 1.627 1.627 0 0 0-1.005 1.516v58.167a1.617 1.617 0 0 0 .967 1.484 1.617 1.617 0 0 0 1.747-.285l9.799-8.937a1.63 1.63 0 0 1 1.383-.399 1.623 1.623 0 0 1 1.155.857l14.664 28.749h16.108l1.34-.705a1.626 1.626 0 0 0 .687-2.221Z" />
-                        </svg>
-                    </a>
-                </p>
-            </div>
-            <br>
-            <p class="footnumber">Invitaciones virtuales <br> <br>+51 967707229</p>
-        </footer>
-        <div id="music-player-bar">
-            <div id="player-content">
-                <div id="track-info">
-                    <div id="track-title">Mi Canción</div>
-                    <div id="track-controls">
-                        <button id="play-btn" style="padding-right: -8px !important;">
-                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none">
-                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                            </svg>
-                        </button>
-                        <button id="pause-btn" style="padding-right: 5px !important;">
-                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none">
-                                <line x1="10" y1="4" x2="10" y2="20"></line>
-                                <line x1="18" y1="4" x2="18" y2="20"></line>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div id="progress-container">
-                    <div id="progress-bar">
-                        <div id="progress-current"></div>
-                    </div>
-                    <div id="time-display">00:00</div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <p class="footnumber">Confirmación de asistencia <br> <br>+51 994 759 530</p>
+    </footer>
 </body>
-<script>
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("active");
-            } else {
-                entry.target.classList.remove("active"); // opcional para repetir animación
-            }
-        });
-    }, { threshold: 0.1 });
-
-    // Animaciones para textos
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach((el) => {
-        observer.observe(el);
-    });
-
-    // Animaciones para imágenes con efecto reveal
-    document.querySelectorAll('.image-reveal').forEach((el, index) => {
-        el.style.setProperty('--delay', `${index * 0.8}s`);
-        observer.observe(el);
-    });
-</script>
-<style>
-    #music-player-bar {
-
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 95%;
-        background: rgba(13, 12, 59, 0.55);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        color: #fff;
-        padding: 7px 0px;
-        z-index: 1000;
-        font-family: 'Helvetica Neue', Arial, sans-serif;
-        border-radius: 40px;
-        margin: 3%;
-        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    #player-content {
-        max-width: 800px;
-        margin: 5px auto;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        padding: 0 40px;
-    }
-
-    #track-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    #track-title {
-        font-size: 18px;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-        position: relative;
-        padding-left: 28px;
-    }
-
-    #track-title::before {
-        content: "♪";
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 24px;
-        color: #ffffff;
-    }
-
-    #track-controls {
-        display: flex;
-        align-items: center;
-        margin-right: 2px;
-    }
-
-    #play-btn,
-    #pause-btn {
-        background: rgba(255, 255, 255, 0.1);
-        border: none;
-        border-radius: 50%;
-        width: 48px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        color: white;
-        stroke-width: 1.5;
-    }
-
-    #play-btn:hover,
-    #pause-btn:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: scale(1.05);
-    }
-
-    #play-btn svg,
-    #pause-btn svg {
-        width: 22px;
-        height: 22px;
-    }
-
-    /* Invertimos la visualización inicial */
-    #play-btn {
-        display: none;
-    }
-
-    #pause-btn {
-        display: flex;
-    }
-
-    #progress-container {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    #progress-bar {
-        flex-grow: 1;
-        height: 4px;
-        background-color: rgba(255, 255, 255, 0.2);
-        border-radius: 2px;
-        position: relative;
-        cursor: pointer;
-    }
-
-    #progress-current {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 0%;
-        background-color: #ffffff;
-        border-radius: 2px;
-        transition: width 0.1s linear;
-    }
-
-    #time-display {
-        font-size: 14px;
-        font-weight: 300;
-        min-width: 50px;
-        text-align: center;
-    }
-
-    @media (min-width: 768px) {
-        #player-content {
-            flex-direction: row;
-            gap: 20px;
-        }
-
-        #track-info {
-            width: 40%;
-        }
-
-        #progress-container {
-            width: 60%;
-        }
-    }
-</style>
-<script>
-    // Crear el elemento de audio
-    const audioPlayer = new Audio('./assets/music.mp3');
-    // Configurar para autoplay
-    audioPlayer.autoplay = true;
-    let isPlaying = true;
-
-    // Función para iniciar la reproducción automáticamente
-    function initPlayer() {
-        // Intentar reproducir automáticamente
-        audioPlayer.play().then(() => {
-            // Si se reproduce con éxito
-            isPlaying = true;
-            document.getElementById('play-btn').style.display = 'none';
-            document.getElementById('pause-btn').style.display = 'flex';
-            updateProgress();
-        }).catch(error => {
-            // Si falla el autoplay (políticas de navegador)
-            console.log("Autoplay prevented:", error);
-            isPlaying = false;
-            document.getElementById('play-btn').style.display = 'flex';
-            document.getElementById('pause-btn').style.display = 'none';
-        });
-    }
-
-    // Iniciar cuando la página se carga
-    window.addEventListener('load', initPlayer);
-
-    document.getElementById('play-btn').addEventListener('click', function () {
-        // Reproducir la canción
-        audioPlayer.play();
-        isPlaying = true;
-        document.getElementById('play-btn').style.display = 'none';
-        document.getElementById('pause-btn').style.display = 'flex';
-
-        // Iniciar actualización de progreso
-        updateProgress();
-    });
-
-    document.getElementById('pause-btn').addEventListener('click', function () {
-        // Pausar la canción
-        audioPlayer.pause();
-        isPlaying = false;
-        document.getElementById('pause-btn').style.display = 'none';
-        document.getElementById('play-btn').style.display = 'flex';
-    });
-
-    // Actualizar la barra de progreso y el tiempo
-    function updateProgress() {
-        if (isPlaying) {
-            const progressBar = document.getElementById('progress-current');
-            const timeDisplay = document.getElementById('time-display');
-
-            // Actualizar cada 100ms
-            const progressInterval = setInterval(function () {
-                if (!isPlaying) {
-                    clearInterval(progressInterval);
-                    return;
-                }
-
-                // Calcular porcentaje de progreso
-                const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-                progressBar.style.width = percentage + '%';
-
-                // Formatear y mostrar tiempo
-                const minutes = Math.floor(audioPlayer.currentTime / 60);
-                const seconds = Math.floor(audioPlayer.currentTime % 60);
-                timeDisplay.textContent =
-                    (minutes < 10 ? '0' + minutes : minutes) + ':' +
-                    (seconds < 10 ? '0' + seconds : seconds);
-
-                // Si termina la canción
-                if (audioPlayer.ended) {
-                    // Al terminar, empezar de nuevo
-                    audioPlayer.currentTime = 0;
-                    audioPlayer.play();
-                }
-            }, 100);
-        }
-    }
-
-    // Permitir clic en la barra de progreso
-    document.getElementById('progress-bar').addEventListener('click', function (e) {
-        const progressBar = document.getElementById('progress-bar');
-        const rect = progressBar.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const width = rect.width;
-        const percentage = (x / width);
-
-        // Actualizar posición de reproducción
-        audioPlayer.currentTime = percentage * audioPlayer.duration;
-
-        // Actualizar visualmente
-        document.getElementById('progress-current').style.width = (percentage * 100) + '%';
-
-        // Actualizar tiempo
-        const minutes = Math.floor(audioPlayer.currentTime / 60);
-        const seconds = Math.floor(audioPlayer.currentTime % 60);
-        document.getElementById('time-display').textContent =
-            (minutes < 10 ? '0' + minutes : minutes) + ':' +
-            (seconds < 10 ? '0' + seconds : seconds);
-    });
-
-    // Actualizar cuando la canción se carga
-    audioPlayer.addEventListener('loadedmetadata', function () {
-        const minutes = Math.floor(audioPlayer.duration / 60);
-        const seconds = Math.floor(audioPlayer.duration % 60);
-        document.getElementById('time-display').textContent =
-            (minutes < 10 ? '0' + minutes : minutes) + ':' +
-            (seconds < 10 ? '0' + seconds : seconds);
-    });
-</script>
 
 </html>
