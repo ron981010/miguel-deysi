@@ -1,4 +1,41 @@
 document.addEventListener('DOMContentLoaded', function () {
+  const music = document.getElementById('music');
+  const musicToggle = document.getElementById('music-toggle');
+  const musicIcon = document.getElementById('music-icon');
+  const musicLabel = document.getElementById('music-label');
+
+  function updateMusicButton(isPlaying) {
+    musicToggle.setAttribute('aria-pressed', String(isPlaying));
+    musicIcon.textContent = isPlaying ? '❚❚' : '▶';
+    musicLabel.textContent = isPlaying ? 'Pausar música' : 'Reproducir música';
+  }
+
+  async function playMusic() {
+    try {
+      await music.play();
+      updateMusicButton(true);
+    } catch (error) {
+      updateMusicButton(false);
+    }
+  }
+
+  musicToggle.addEventListener('click', function () {
+    if (music.paused) {
+      playMusic();
+    } else {
+      music.pause();
+      updateMusicButton(false);
+    }
+  });
+
+  document.addEventListener('pointerdown', function startMusic(event) {
+    if (!event.target.closest('#music-toggle') && music.paused) {
+      playMusic();
+    }
+  }, { once: true });
+
+  playMusic();
+
   const revealElements = document.querySelectorAll('.reveal-photo, .names');
 
   if ('IntersectionObserver' in window) {

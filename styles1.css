@@ -569,16 +569,6 @@ a {
   opacity: 1;
 }
 
-.container1 {
-  background-image: url("assets/miguel-deysi-03.jpeg");
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .container2 {
   background-image: url("assets/miguel-deysi-04.jpeg");
   background-size: cover;
@@ -652,9 +642,27 @@ a {
 .couple-frame {
   margin-top: 120px;
   height: 300px;
-  background: url("marco.png") center center no-repeat;
-  background-size: contain;
+  background: #fff;
   position: relative;
+  overflow: hidden;
+}
+
+.couple-frame::before,
+.couple-frame::after {
+  content: "";
+  position: absolute;
+  right: 22%;
+  left: 22%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #64796c, transparent);
+}
+
+.couple-frame::before {
+  top: 30px;
+}
+
+.couple-frame::after {
+  bottom: 30px;
 }
 
 .couple-names {
@@ -662,10 +670,13 @@ a {
   width: 100%;
   top: 10px;
   left: 0;
+  z-index: 2;
 }
 
 .couple-names .name-special {
   font-size: 2.5em;
+  line-height: 1.15;
+  rotate: 0deg;
 }
 
 .couple-heart {
@@ -673,6 +684,30 @@ a {
   width: 100%;
   top: 180px;
   left: 0;
+  z-index: 2;
+}
+
+.music-toggle {
+  position: fixed;
+  z-index: 20;
+  top: 16px;
+  right: max(16px, calc((100vw - 500px) / 2 + 16px));
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(16, 83, 59, 0.88);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  font-family: "Fraunces", Arial, sans-serif;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+
+.music-toggle[aria-pressed="true"] {
+  background: rgba(100, 121, 108, 0.92);
 }
 
 .event-invite {

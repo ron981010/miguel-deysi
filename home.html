@@ -12,6 +12,14 @@
     <meta property="og:type" content="website">
 </head>
 <body style="background-color: #fff;">
+    <button id="music-toggle" class="music-toggle" type="button" aria-pressed="false">
+        <span id="music-icon" aria-hidden="true">▶</span>
+        <span id="music-label">Reproducir música</span>
+    </button>
+    <audio id="music" preload="auto" loop>
+        <source src="assets/music.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="container photo-panel"></div>
 
     <div class="names">
@@ -21,8 +29,6 @@
         <div class="lineY"><div class="heart"></div></div>
     </div>
 
-    <div class="container1 photo-panel reveal-photo"></div>
-    <div id="png-container"></div>
     <div class="names">
         <p id="space" class="letering">Nada nos haría más felices que compartir contigo</p>
         <p class="name-2">NUESTRO DÍA ESPECIAL.</p>
@@ -30,7 +36,7 @@
 
     <div class="container2 photo-panel reveal-photo"></div>
     <div id="png-container"></div>
-    <div class="couple-frame">
+    <div class="couple-frame" id="couple-names">
         <div class="names couple-names">
             <h1 class="name-special">Miguel<br>y Deysi</h1>
         </div>
@@ -41,7 +47,7 @@
         <h1 class="name-1">DÍA<br>DOMINGO</h1>
         <div class="lineA"><div class="date">6</div></div>
         <h1 class="name-2">DE SEPTIEMBRE</h1>
-        <div class="name-1">16:00 <span>hrs</span></div>
+        <div class="name-1">15:30 <span>hrs</span></div>
     </div>
 
     <div class="container3 photo-panel reveal-photo"></div>

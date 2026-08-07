@@ -25,7 +25,7 @@
    }
 
 document.addEventListener('DOMContentLoaded', function() {
-  const countdownDate = new Date('2026-09-06T16:00:00-04:00').getTime();
+  const countdownDate = new Date('2026-09-06T15:30:00-04:00').getTime();
 
   const daysElement = document.getElementById('days');
   const hoursElement = document.getElementById('hours');
